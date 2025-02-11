@@ -1,11 +1,13 @@
+**Important** : Thanks to https://github.com/perscrew for the original project. I have forked it and made some changes to the project. The original project can be found at https://github.com/perscrew/pet-rest-api
+
 # Pet-Shop REST API
 
-[![Build Status](https://travis-ci.org/perscrew/pet-rest-api.svg?branch=master)](https://travis-ci.org/perscrew/pet-rest-api)
+[![Build Status](https://travis-ci.org/eryx12o45/pet-rest-api.svg?branch=master)](https://travis-ci.org/eryx12o45/pet-rest-api)
 
 This project exposes some REST CRUD service for a Pet Shop.
 It demonstrates the use of Spring Boot & Java 21.
 A h2 in memory database has been used to store the pet shop data.
-These services are consumed  by a front-end app hosted on another [Github project : pet-shop-reactjs](https://github.com/perscrew/pet-shop-reactjs).
+These services are consumed  by a front-end app hosted on another [GitHub project : pet-shop-reactjs](https://github.com/eryx12o45/pet-shop-reactjs).
 
 **Important** : The project requires maven 3.x, a Java 21 JDK and Spring Boot 3.
 
@@ -13,7 +15,7 @@ These services are consumed  by a front-end app hosted on another [Github projec
 
 * Clone the GitHub repository :
 ```
-git clone https://github.com/perscrew/pet-rest-api.git
+git clone https://github.com/eryx12o45/pet-rest-api.git
 
 ```
 
