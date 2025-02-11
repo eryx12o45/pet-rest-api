@@ -6,11 +6,12 @@ import fr.pet.rest.core.model.Category;
 import fr.pet.rest.core.model.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 /**
  * Created by TDERVILY on 01/03/2017.
@@ -37,7 +38,7 @@ public class PetController {
     @CrossOrigin
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> update(@RequestBody Pet pet) {
-        if (petRepository.findOne(pet.getId()) != null) {
+        if (petRepository.findById(pet.getId()) != null) {
             return savePet(pet);
         } else {
             return ResponseEntity.noContent().build();
@@ -53,25 +54,25 @@ public class PetController {
     @CrossOrigin
     @RequestMapping(value = "/{petId}", method = RequestMethod.GET)
     public ResponseEntity<Pet> getById(@PathVariable Long petId) {
-        return  new ResponseEntity<>(petRepository.findOne(petId), HttpStatus.OK);
+        return new ResponseEntity<>(petRepository.findById(petId).get(), HttpStatus.OK);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{petId}", method = RequestMethod.DELETE)
     public ResponseEntity delete(@PathVariable Long petId) {
-        petRepository.delete(petId);
+        petRepository.deleteById(petId);
         return ResponseEntity.ok().build();
     }
 
     private ResponseEntity<?> savePet(Pet pet) {
         // Fetch pet category from id
-        Category category = this.categoryRepository.findOne(pet.getCategory().getId());
+        Optional<Category> category = this.categoryRepository.findById(pet.getCategory().getId());
 
-        if (category == null)
+        if (category.isEmpty())
             return ResponseEntity.noContent().build();
 
         // Save pet
-        pet.setCategory(category);
+        pet.setCategory(category.get());
         return new ResponseEntity<>(petRepository.save(pet), HttpStatus.OK);
     }
 }

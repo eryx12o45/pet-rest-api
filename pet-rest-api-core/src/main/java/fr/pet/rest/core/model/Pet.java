@@ -1,7 +1,8 @@
 package fr.pet.rest.core.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.Optional;
 
 /**
  * Created by TDERVILY on 01/03/2017.

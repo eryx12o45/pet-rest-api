@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Created by Tib on 06/03/2017.
@@ -41,6 +41,6 @@ abstract public class BaseTest {
                 .findAny()
                 .orElse(null);
 
-        assertNotNull("the JSON message converter must not be null", this.mappingJackson2HttpMessageConverter);
+        assertNotNull(this.mappingJackson2HttpMessageConverter, "the JSON message converter must not be null");
     }
 }
