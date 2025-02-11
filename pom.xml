@@ -23,10 +23,9 @@
 
     <properties>
         <h2.version>2.3.232</h2.version>
-        <maven.compiler.source>23</maven.compiler.source>
-        <maven.compiler.target>23</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <spring.boot>3.4.2</spring.boot>
-        <swagger.version>3.0.0</swagger.version>
     </properties>
 
     <dependencyManagement>
