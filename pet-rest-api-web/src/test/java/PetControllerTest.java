@@ -4,27 +4,16 @@ import fr.pet.rest.core.dao.PetRepository;
 import fr.pet.rest.core.model.Category;
 import fr.pet.rest.core.model.Pet;
 import net.minidev.json.JSONArray;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.mock.http.MockHttpOutputMessage;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.context.WebApplicationContext;
-
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Arrays;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isA;
-import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,7 +22,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 /**
  * Created by TDERVILY on 02/03/2017.
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
 public class PetControllerTest extends BaseTest {
@@ -45,14 +34,14 @@ public class PetControllerTest extends BaseTest {
     @Autowired
     PetRepository petRepository;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.mockMvc = webAppContextSetup(this.webApplicationContext).build();
         Category dogCategory = new Category(1L, "dog");
         categoryRepository.save(dogCategory);
         petRepository.save(new Pet("Labrador chocolate", 2, dogCategory));
         petRepository.save(new Pet("Golden retriever", 2, dogCategory));
-        pet = petRepository.findOne(1L);
+        pet = petRepository.findById(0L).get();
     }
 
     @Test
@@ -84,7 +73,7 @@ public class PetControllerTest extends BaseTest {
     }
 
     private void test3UpdatePet() throws Exception {
-        Pet pet = petRepository.findOne(1L);
+        Pet pet = petRepository.findById(0L).get();
         Pet petUpd = new Pet(pet.getName() + "updated", pet.getQuantity(), new Category(pet.getId()));
         petUpd.setId(pet.getId());
 

@@ -3,11 +3,11 @@
 [![Build Status](https://travis-ci.org/perscrew/pet-rest-api.svg?branch=master)](https://travis-ci.org/perscrew/pet-rest-api)
 
 This project exposes some REST CRUD service for a Pet Shop.
-It demonstrates the use of Spring-boot & Java 8.
+It demonstrates the use of Spring-boot & Java 21.
 An h2 in memory database has been used to store the pet shop data.
 These services are consumed  by a front-end app hosted on another [Github project : pet-shop-reactjs](https://github.com/perscrew/pet-shop-reactjs).
 
-**Important** : The project requires maven 3.x and a Java 8 jdk.
+**Important** : The project requires maven 3.x and a Java 21 jdk.
 
 ## 1. Installation
 
