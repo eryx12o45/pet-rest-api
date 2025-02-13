@@ -17,7 +17,7 @@ CREATE TABLE PET (
 
 
 /*==============================================================*/
-/* Table : GATEGORY		                                        */
+/* Table : CATEGORY		                                        */
 /*==============================================================*/
 CREATE TABLE CATEGORY (
 	ID 				    BIGINT           not null,

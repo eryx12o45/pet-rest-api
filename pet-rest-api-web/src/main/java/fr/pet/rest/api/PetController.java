@@ -5,8 +5,6 @@ import fr.pet.rest.core.dao.PetRepository;
 import fr.pet.rest.core.model.Category;
 import fr.pet.rest.core.model.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +36,7 @@ public class PetController {
     @CrossOrigin
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> update(@RequestBody Pet pet) {
-        if (petRepository.findById(pet.getId()) != null) {
+        if (petRepository.findById(pet.getId()).isPresent()) {
             return savePet(pet);
         } else {
             return ResponseEntity.noContent().build();
@@ -47,8 +45,8 @@ public class PetController {
 
     @CrossOrigin
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<Page> list(Pageable pageable) {
-        return new ResponseEntity<>(this.petRepository.findAll(pageable), HttpStatus.OK);
+    public ResponseEntity<Iterable<Pet>> list() {
+        return new ResponseEntity<>(this.petRepository.findAll(), HttpStatus.OK);
     }
 
     @CrossOrigin
@@ -59,7 +57,7 @@ public class PetController {
 
     @CrossOrigin
     @RequestMapping(value = "/{petId}", method = RequestMethod.DELETE)
-    public ResponseEntity delete(@PathVariable Long petId) {
+    public ResponseEntity<Pet> delete(@PathVariable Long petId) {
         petRepository.deleteById(petId);
         return ResponseEntity.ok().build();
     }
